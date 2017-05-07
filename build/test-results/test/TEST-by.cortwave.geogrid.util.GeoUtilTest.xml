@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="by.cortwave.geogrid.util.GeoUtilTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-05-07T21:24:40" hostname="Dmitrys-MacBook-Pro.local" time="0.003">
-  <properties/>
-  <testcase name="getMiddlePointTest" classname="by.cortwave.geogrid.util.GeoUtilTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
