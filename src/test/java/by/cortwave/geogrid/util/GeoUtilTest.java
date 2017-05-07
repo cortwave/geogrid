@@ -2,6 +2,7 @@ package by.cortwave.geogrid.util;
 
 import by.cortwave.geogrid.TestUtil;
 import by.cortwave.geogrid.model.Point;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -42,5 +43,14 @@ public class GeoUtilTest {
             TestUtil.assertEquals(testCase.middlePoint, middlePoint);
             TestUtil.assertEquals(testCase.middlePoint, reversedMiddlePoint);
         }
+    }
+
+    @Test
+    public void getDistanceTest() {
+        double delta = 50;
+        Assert.assertEquals(5553800, GeoUtil.getDistance(new Point(54.307829, 27.263027), new Point(43.622513, 105.903936)), delta);
+        Assert.assertEquals(4796090, GeoUtil.getDistance(new Point(-7.065273, -40.711679), new Point(-38.726086, -73.231210)), delta);
+        Assert.assertEquals(4434120, GeoUtil.getDistance(new Point(34.904545, -117.291397), new Point(48.568881, -65.869824)), delta);
+        Assert.assertEquals(10645800, GeoUtil.getDistance(new Point(-8.546770, 37.077698), new Point(-30.310225, 138.907860)), delta);
     }
 }
