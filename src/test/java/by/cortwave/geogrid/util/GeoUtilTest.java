@@ -62,4 +62,13 @@ public class GeoUtilTest {
         Assert.assertEquals(Math.toRadians(54), GeoUtil.getBearing(new Point(34.904545, -117.291397), new Point(48.568881, -65.869824)), delta);
         Assert.assertEquals(Math.toRadians(121.5), GeoUtil.getBearing(new Point(-8.546770, 37.077698), new Point(-30.310225, 138.907860)), delta);
     }
+
+    @Test
+    public void getAngularDistanceTest() {
+        double delta = 1e-6;
+        Assert.assertEquals(0.8717358727393598, GeoUtil.getAngularDistance(new Point(54.307829, 27.263027), new Point(43.622513, 105.903936)), delta);
+        Assert.assertEquals(0.7527981024177604, GeoUtil.getAngularDistance(new Point(-7.065273, -40.711679), new Point(-38.726086, -73.231210)), delta);
+        Assert.assertEquals(0.6959834406457822, GeoUtil.getAngularDistance(new Point(34.904545, -117.291397), new Point(48.568881, -65.869824)), delta);
+        Assert.assertEquals(1.6709816538873894, GeoUtil.getAngularDistance(new Point(-8.546770, 37.077698), new Point(-30.310225, 138.907860)), delta);
+    }
 }

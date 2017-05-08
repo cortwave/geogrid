@@ -42,6 +42,20 @@ public class GeoUtil {
     }
 
     /**
+     * Calculates shortest distance between two points (great-circle path) in radians
+     *
+     * @param pointA start point
+     * @param pointB end point
+     * @return distance between points in radians
+     */
+    public static double getAngularDistance(Point pointA, Point pointB) {
+        double dLat = toRadians(pointA.lat - pointB.lat);
+        double dLong = toRadians(pointA.lon - pointB.lon);
+        double a = pow(sin(dLat / 2), 2) + cos(toRadians(pointA.lat)) * cos(toRadians(pointB.lat)) * pow(sin(dLong / 2), 2);
+        return 2 * atan2(sqrt(a), sqrt(1 - a));
+    }
+
+    /**
      * Calculates shortest distance between two points (great-circle path) in metres
      *
      * @param pointA start point
@@ -49,11 +63,7 @@ public class GeoUtil {
      * @return distance between points in metres
      */
     public static double getDistance(Point pointA, Point pointB) {
-        double dLat = toRadians(pointA.lat - pointB.lat);
-        double dLong = toRadians(pointA.lon - pointB.lon);
-        double a = pow(sin(dLat / 2), 2) + cos(toRadians(pointA.lat)) * cos(toRadians(pointB.lat)) * pow(sin(dLong / 2), 2);
-        double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-        return GeoConstants.MEAN_EARTH_RADIUS_IN_METRES * c;
+        return GeoConstants.MEAN_EARTH_RADIUS_IN_METRES * getAngularDistance(pointA, pointB);
     }
 
     /**
