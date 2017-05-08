@@ -76,7 +76,10 @@ public class GeoPointTest {
         List<GeoPoint> points = Arrays.asList(new GeoPoint(54.307829, 27.263027),
                 new GeoPoint(-7.065273, -40.711679),
                 new GeoPoint(34.904545, -117.291397),
-                new GeoPoint(-8.546770, 37.077698));
+                new GeoPoint(-8.546770, 37.077698),
+                new GeoPoint(65.261136, 18.908054),
+                new GeoPoint(38.511113, -3.238962),
+                new GeoPoint(39.080154, 43.732182));
 
         for(GeoPoint point: points) {
             TestUtil.assertEquals(point.toCartesianPoint().toGeoPoint(), point);

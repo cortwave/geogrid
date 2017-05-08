@@ -1,5 +1,6 @@
 package by.cortwave.geogrid.shape;
 
+import by.cortwave.geogrid.TestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -73,6 +74,30 @@ public class TriangleTest {
 
         for(TestCase testCase: testCases) {
             Assert.assertEquals(testCase.result, testCase.triangle.isPointInside(testCase.point));
+        }
+    }
+
+    @Test
+    public void getCenterTest() {
+        class TestCase {
+            private TestCase(Triangle triangle, GeoPoint center) {
+                this.triangle = triangle;
+                this.center = center;
+            }
+
+            private Triangle triangle;
+            private GeoPoint center;
+        }
+
+        List<TestCase> testCases = Arrays.asList(
+                new TestCase(new Triangle(new GeoPoint(-18.742777, -55.257133), new GeoPoint(-18.835921, -55.314301), new GeoPoint(-18.832588, -55.201208)),
+                        new GeoPoint(-18.803756471738208, -55.25754688430901)),
+                new TestCase(new Triangle(new GeoPoint(51.836852, 13.990265), new GeoPoint(51.761543, 13.922953), new GeoPoint(51.762179, 14.057576)),
+                        new GeoPoint(51.78684414554892, 13.990264350242164))
+        );
+
+        for(TestCase testCase: testCases) {
+            TestUtil.assertEquals(testCase.center, testCase.triangle.getCenter());
         }
     }
 }

@@ -2,9 +2,8 @@ package by.cortwave.geogrid.shape;
 
 import by.cortwave.geogrid.constant.GeoConstants;
 
-import static java.lang.Math.acos;
 import static java.lang.Math.asin;
-import static java.lang.Math.cos;
+import static java.lang.Math.atan2;
 import static java.lang.Math.toDegrees;
 
 /**
@@ -28,9 +27,8 @@ public class CartesianPoint {
      * @return point in spherical lat-long coordinates
      */
     public GeoPoint toGeoPoint() {
-        double lonSign = y > 0 ? 1 : -1;
         double lat = asin(z / GeoConstants.MEAN_EARTH_RADIUS_IN_METRES);
-        double lon = lonSign * acos(x / (GeoConstants.MEAN_EARTH_RADIUS_IN_METRES * cos(lat)));
+        double lon = atan2(y, x);
         return new GeoPoint(toDegrees(lat), toDegrees(lon));
     }
 }
