@@ -3,6 +3,8 @@ package by.cortwave.geogrid.util;
 import by.cortwave.geogrid.constant.GeoConstants;
 import by.cortwave.geogrid.model.Point;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.asin;
 import static java.lang.Math.atan;
 import static java.lang.Math.atan2;
 import static java.lang.Math.cos;
@@ -11,7 +13,6 @@ import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
-import static java.lang.Math.PI;
 
 /**
  * Util class for calculating geometric values on the sphere
@@ -79,7 +80,20 @@ public class GeoUtil {
         double longA = toRadians(pointA.lon);
         double longB = toRadians(pointB.lon);
         double dLong = longB - longA;
-        double bearing =  atan2(sin(dLong) * cos(latB), cos(latA) * sin(latB) - sin(latA) * cos(latB) * cos(dLong));
+        double bearing = atan2(sin(dLong) * cos(latB), cos(latA) * sin(latB) - sin(latA) * cos(latB) * cos(dLong));
         return (bearing + 2 * PI) % (2 * PI);
+    }
+
+    /**
+     * Calculates cross-track distance (cross-track error) in metres.
+     * Cross-track distance is distance from point to great-circle path
+     *
+     * @param point  point
+     * @param pointA great-circle path start
+     * @param pointB great-circle path end
+     * @return cross-track distance in metres
+     */
+    public static double getCrossTrackDistance(Point point, Point pointA, Point pointB) {
+        return asin(sin(getAngularDistance(point, pointA)) * sin(getBearing(pointA, point) - getBearing(pointA, pointB))) * GeoConstants.MEAN_EARTH_RADIUS_IN_METRES;
     }
 }
