@@ -1,0 +1,36 @@
+package by.cortwave.geogrid.shape;
+
+import by.cortwave.geogrid.constant.GeoConstants;
+
+import static java.lang.Math.acos;
+import static java.lang.Math.asin;
+import static java.lang.Math.cos;
+import static java.lang.Math.toDegrees;
+
+/**
+ * @author Dmitry Pranchuk
+ * @since 5/8/17.
+ */
+public class CartesianPoint {
+    public CartesianPoint(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public final double x;
+    public final double y;
+    public final double z;
+
+    /**
+     * Converses to spherical lat-long coordinates
+     *
+     * @return point in spherical lat-long coordinates
+     */
+    public GeoPoint toGeoPoint() {
+        double lonSign = y > 0 ? 1 : -1;
+        double lat = asin(z / GeoConstants.MEAN_EARTH_RADIUS_IN_METRES);
+        double lon = lonSign * acos(x / (GeoConstants.MEAN_EARTH_RADIUS_IN_METRES * cos(lat)));
+        return new GeoPoint(toDegrees(lat), toDegrees(lon));
+    }
+}

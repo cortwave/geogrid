@@ -5,15 +5,15 @@ package by.cortwave.geogrid.shape;
  * @since 5/8/17.
  */
 public class Triangle {
-    public Triangle(Point a, Point b, Point c) {
+    public Triangle(GeoPoint a, GeoPoint b, GeoPoint c) {
         this.a = a;
         this.b = b;
         this.c = c;
     }
 
-    public final Point a;
-    public final Point b;
-    public final Point c;
+    public final GeoPoint a;
+    public final GeoPoint b;
+    public final GeoPoint c;
 
     /**
      * Checks if triangle intersects with circle
@@ -22,15 +22,15 @@ public class Triangle {
      * @param radius radius of circle in metres
      * @return is circle intersects with triangular
      */
-    public boolean intersectsWithCircle(Point circleCenter, double radius) {
+    public boolean intersectsWithCircle(GeoPoint circleCenter, double radius) {
         return Math.abs(circleCenter.getCrossTrackDistance(a, b)) <= radius || Math.abs(circleCenter.getCrossTrackDistance(b, c)) <= radius ||
                 Math.abs(circleCenter.getCrossTrackDistance(c, a)) <= radius;
     }
 
-    public boolean isPointInside(Point point) {
-        boolean orientationA = point.getCrossTrackDistance(a, b) > 0;
-        boolean orientationB = point.getCrossTrackDistance(b, c) > 0;
-        boolean orientationC = point.getCrossTrackDistance(c, a) > 0;
+    public boolean isPointInside(GeoPoint geoPoint) {
+        boolean orientationA = geoPoint.getCrossTrackDistance(a, b) > 0;
+        boolean orientationB = geoPoint.getCrossTrackDistance(b, c) > 0;
+        boolean orientationC = geoPoint.getCrossTrackDistance(c, a) > 0;
         return (orientationA == orientationB) && (orientationB == orientationC);
     }
 }
