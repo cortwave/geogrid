@@ -26,4 +26,11 @@ public class Triangle {
         return Math.abs(circleCenter.getCrossTrackDistance(a, b)) <= radius || Math.abs(circleCenter.getCrossTrackDistance(b, c)) <= radius ||
                 Math.abs(circleCenter.getCrossTrackDistance(c, a)) <= radius;
     }
+
+    public boolean isPointInside(Point point) {
+        boolean orientationA = point.getCrossTrackDistance(a, b) > 0;
+        boolean orientationB = point.getCrossTrackDistance(b, c) > 0;
+        boolean orientationC = point.getCrossTrackDistance(c, a) > 0;
+        return (orientationA == orientationB) && (orientationB == orientationC);
+    }
 }
