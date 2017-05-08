@@ -14,6 +14,10 @@ import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
 
 /**
+ * Geo point shape with lat, long
+ *
+ * See here for more formulas http://www.movable-type.co.uk/scripts/latlong.html
+ *
  * @author Dmitry Pranchuk
  * @since 5/7/17.
  */
@@ -85,13 +89,14 @@ public class Point {
 
     /**
      * Calculates cross-track distance (cross-track error) in metres.
-     * Cross-track distance is distance from point to great-circle path
+     * Cross-track distance is distance from point to great-circle path.
+     * The sign of result tells which side of the path the point is on.
      *
      * @param pointA great-circle path start
      * @param pointB great-circle path end
      * @return cross-track distance in metres
      */
     public double getCrossTrackDistance(Point pointA, Point pointB) {
-        return asin(sin(getAngularDistanceTo(pointA)) * sin(pointA.getBearingTo(this) - pointA.getBearingTo(pointB))) * GeoConstants.MEAN_EARTH_RADIUS_IN_METRES;
+        return asin(sin(pointA.getAngularDistanceTo(this)) * sin(pointA.getBearingTo(this) - pointA.getBearingTo(pointB))) * GeoConstants.MEAN_EARTH_RADIUS_IN_METRES;
     }
 }

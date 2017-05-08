@@ -14,4 +14,16 @@ public class Triangle {
     public final Point a;
     public final Point b;
     public final Point c;
+
+    /**
+     * Checks if triangle intersects with circle
+     *
+     * @param circleCenter center of circle
+     * @param radius radius of circle in metres
+     * @return is circle intersects with triangular
+     */
+    public boolean intersectsWithCircle(Point circleCenter, double radius) {
+        return Math.abs(circleCenter.getCrossTrackDistance(a, b)) <= radius || Math.abs(circleCenter.getCrossTrackDistance(b, c)) <= radius ||
+                Math.abs(circleCenter.getCrossTrackDistance(c, a)) <= radius;
+    }
 }
