@@ -1,6 +1,6 @@
 package by.cortwave.geogrid;
 
-import by.cortwave.geogrid.model.Point;
+import by.cortwave.geogrid.shape.Point;
 import org.junit.Assert;
 
 /**
