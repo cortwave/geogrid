@@ -1,19 +1,25 @@
 package by.cortwave.geogrid.shape;
 
+import java.util.Arrays;
+import java.util.List;
+import static java.lang.Math.abs;
+
 /**
  * @author Dmitry Pranchuk
  * @since 5/8/17.
  */
-public class Triangle {
-    public Triangle(GeoPoint a, GeoPoint b, GeoPoint c) {
+public class Triangle implements Zone {
+    public Triangle(GeoPoint a, GeoPoint b, GeoPoint c, String id) {
         this.a = a;
         this.b = b;
         this.c = c;
+        this.id = id;
     }
 
     public final GeoPoint a;
     public final GeoPoint b;
     public final GeoPoint c;
+    public final String id;
 
     /**
      * Checks if triangle intersects with circle
@@ -54,5 +60,56 @@ public class Triangle {
                 (pointA.y + pointB.y + pointC.y) / 3,
                 (pointA.z + pointB.z + pointC.z) / 3);
         return center.toGeoPoint();
+    }
+
+    /**
+     * Splits triangle using middle lines
+     *
+     * @return splitted triangles
+     */
+    public List<Triangle> splitByMiddleLines() {
+        GeoPoint ab = a.getMiddlePointTo(b);
+        GeoPoint bc = b.getMiddlePointTo(c);
+        GeoPoint ca = c.getMiddlePointTo(a);
+        return Arrays.asList(new Triangle(a, ab, ca, id + "1"),
+                new Triangle(ab, b, bc, id + "2"),
+                new Triangle(ca, bc, c, id + "3"),
+                new Triangle(ca, ab, bc, id + "4"));
+    }
+
+
+    /**
+     * Checks if triangle can contains part (or whole) of hex which contains point.
+     *
+     * @param point point which belongs to hex
+     * @return result of check
+     */
+    public boolean isPartOfHex(GeoPoint point) {
+        double ac = a.getDistanceTo(c);
+        return point.getDistanceTo(getCenter()) < 1.5 * ac;
+    }
+
+    public double getDistanceToClosestVerticle(GeoPoint point) {
+        return Math.min(a.getDistanceTo(point), Math.min(b.getDistanceTo(point), c.getDistanceTo(point)));
+    }
+
+    @Override
+    public String toString() {
+        return "Triangle{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
+                ", id='" + id + '\'' +
+                '}';
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public List<GeoPoint> getPolygon() {
+        return Arrays.asList(a, b, c);
     }
 }

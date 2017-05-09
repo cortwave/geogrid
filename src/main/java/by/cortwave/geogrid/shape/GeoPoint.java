@@ -4,7 +4,6 @@ import by.cortwave.geogrid.constant.GeoConstants;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.asin;
-import static java.lang.Math.atan;
 import static java.lang.Math.atan2;
 import static java.lang.Math.cos;
 import static java.lang.Math.pow;
@@ -15,7 +14,7 @@ import static java.lang.Math.toRadians;
 
 /**
  * Geo point shape with lat, long
- *
+ * <p>
  * See here for more formulas http://www.movable-type.co.uk/scripts/latlong.html
  *
  * @author Dmitry Pranchuk
@@ -37,14 +36,17 @@ public class GeoPoint {
      * @return middle point
      */
     public GeoPoint getMiddlePointTo(GeoPoint geoPoint) {
+        // corner case check
+        if (this.lat == 90 || geoPoint.lat == 90 || this.lat == -90 || geoPoint.lat == -90) {
+            return new GeoPoint((this.lat + geoPoint.lat) / 2, (this.lon + geoPoint.lon) / 2);
+        }
         double latA = toRadians(this.lat);
         double latB = toRadians(geoPoint.lat);
         double longA = toRadians(this.lon);
         double longB = toRadians(geoPoint.lon);
         double dLong = longB - longA;
-        double longMiddle = longA + atan(cos(latB) * sin(dLong) / (cos(latA) + cos(latB) * cos(dLong)));
-        double latMiddle = atan((sin(latA) + sin(latB)) / sqrt(pow(cos(latA) + cos(latB) * cos(dLong), 2.0D)
-                + pow(cos(latB) * sin(dLong), 2.0D)));
+        double latMiddle = atan2(sin(latA) + sin(latB), sqrt((cos(latA) + cos(latB) * cos(dLong)) * (cos(latA) + cos(latB) * cos(dLong)) + pow(cos(latB), 2) * pow(sin(dLong), 2)));
+        double longMiddle = longA + atan2(cos(latB) * sin(dLong), cos(latA) + cos(latB) * cos(dLong));
         return new GeoPoint(toDegrees(latMiddle), toDegrees(longMiddle));
     }
 
@@ -112,5 +114,13 @@ public class GeoPoint {
         double y = GeoConstants.MEAN_EARTH_RADIUS_IN_METRES * cos(latR) * sin(longR);
         double z = GeoConstants.MEAN_EARTH_RADIUS_IN_METRES * sin(latR);
         return new CartesianPoint(x, y, z);
+    }
+
+    @Override
+    public String toString() {
+        return "GeoPoint{" +
+                "lat, lon = " + lat +
+                ", " + lon +
+                '}';
     }
 }

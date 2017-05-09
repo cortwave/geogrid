@@ -29,11 +29,14 @@ public class GeoPointTest {
         List<TestCase> testCases = Arrays.asList(
                 new TestCase(new GeoPoint(0, 0), new GeoPoint(0, 90), new GeoPoint(0, 45)),
                 new TestCase(new GeoPoint(0, 0), new GeoPoint(90, 0), new GeoPoint(45, 0)),
+                new TestCase(new GeoPoint(90, 0), new GeoPoint(0, 0), new GeoPoint(45, 0)),
                 new TestCase(new GeoPoint(54.307829, 27.263027), new GeoPoint(43.622513, 105.903936), new GeoPoint(55.944408868324984, 71.61309793716599)),
                 new TestCase(new GeoPoint(-7.065273, -40.711679), new GeoPoint(-38.726086, -73.231210), new GeoPoint(-23.732961109037166, -54.97116026977392)),
                 new TestCase(new GeoPoint(34.904545, -117.291397), new GeoPoint(48.568881, -65.869824), new GeoPoint(44.678439991822614, -94.5267862057571)),
                 new TestCase(new GeoPoint(-8.546770, 37.077698), new GeoPoint(-30.310225, 138.907860), new GeoPoint(-29.1399616045078, 83.22081823946012)),
-                new TestCase(new GeoPoint(0, 45), new GeoPoint(0, 90), new GeoPoint(0, 67.5))
+                new TestCase(new GeoPoint(0, 45), new GeoPoint(0, 90), new GeoPoint(0, 67.5)),
+                new TestCase(new GeoPoint(90, 0), new GeoPoint(0, 180), new GeoPoint(45, 90)),
+        new TestCase(new GeoPoint(-90, 0), new GeoPoint(0, 180), new GeoPoint(-45, 90))
         );
 
         for (TestCase testCase : testCases) {
@@ -81,7 +84,7 @@ public class GeoPointTest {
                 new GeoPoint(38.511113, -3.238962),
                 new GeoPoint(39.080154, 43.732182));
 
-        for(GeoPoint point: points) {
+        for (GeoPoint point : points) {
             TestUtil.assertEquals(point.toCartesianPoint().toGeoPoint(), point);
         }
     }
