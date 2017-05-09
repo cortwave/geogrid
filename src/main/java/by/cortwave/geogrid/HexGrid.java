@@ -1,6 +1,5 @@
 package by.cortwave.geogrid;
 
-import by.cortwave.geogrid.constant.GeoConstants;
 import by.cortwave.geogrid.shape.GeoPoint;
 import by.cortwave.geogrid.shape.Hex;
 import by.cortwave.geogrid.shape.Triangle;

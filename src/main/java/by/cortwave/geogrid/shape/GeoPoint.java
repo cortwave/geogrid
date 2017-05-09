@@ -36,10 +36,6 @@ public class GeoPoint {
      * @return middle point
      */
     public GeoPoint getMiddlePointTo(GeoPoint geoPoint) {
-        // corner case check
-        if (this.lat == 90 || geoPoint.lat == 90 || this.lat == -90 || geoPoint.lat == -90) {
-            return new GeoPoint((this.lat + geoPoint.lat) / 2, (this.lon + geoPoint.lon) / 2);
-        }
         double latA = toRadians(this.lat);
         double latB = toRadians(geoPoint.lat);
         double longA = toRadians(this.lon);
