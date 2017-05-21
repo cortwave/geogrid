@@ -46,7 +46,6 @@ public class HexGrid implements Grid<Hex> {
                 .sorted(Comparator.comparingDouble(t -> t.getDistanceToClosestVerticle(point)))
                 .limit(6)
                 .collect(Collectors.toList());
-        hexTriangles.forEach(System.out::println);
         return new Hex(hexTriangles);
     }
 }
