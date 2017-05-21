@@ -28,7 +28,7 @@ public class Hex implements Zone {
 
     @Override
     public List<GeoPoint> getPolygon() {
-        List<GeoPoint> polygon =  triangles.stream()
+        List<GeoPoint> polygon = triangles.stream()
                 .map(Triangle::getCenter)
                 .collect(Collectors.toList());
         return sortByDistance(polygon);
@@ -40,12 +40,12 @@ public class Hex implements Zone {
         points.remove(firstPoint);
         sorted.add(firstPoint);
         GeoPoint prevPoint = firstPoint;
-        while(points.size() > 0) {
+        while (points.size() > 0) {
             GeoPoint nearest = null;
             double nearestDistance = 0;
-            for(GeoPoint p: points) {
+            for (GeoPoint p : points) {
                 double distanceToPrev = p.getDistanceTo(prevPoint);
-                if(nearest == null || nearestDistance > distanceToPrev) {
+                if (nearest == null || nearestDistance > distanceToPrev) {
                     nearest = p;
                     nearestDistance = distanceToPrev;
                 }
@@ -59,6 +59,6 @@ public class Hex implements Zone {
 
     @Override
     public String toString() {
-        return "Hex{" + getId() +  "}";
+        return "Hex{" + getId() + "}";
     }
 }

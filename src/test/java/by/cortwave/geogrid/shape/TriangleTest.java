@@ -72,7 +72,7 @@ public class TriangleTest {
                         false)
         );
 
-        for(TestCase testCase: testCases) {
+        for (TestCase testCase : testCases) {
             Assert.assertEquals(testCase.result, testCase.triangle.isPointInside(testCase.point));
         }
     }
@@ -96,7 +96,7 @@ public class TriangleTest {
                         new GeoPoint(51.78684414554892, 13.990264350242164))
         );
 
-        for(TestCase testCase: testCases) {
+        for (TestCase testCase : testCases) {
             TestUtil.assertEquals(testCase.center, testCase.triangle.getCenter());
         }
     }

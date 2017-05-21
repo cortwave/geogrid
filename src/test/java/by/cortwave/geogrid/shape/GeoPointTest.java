@@ -36,7 +36,7 @@ public class GeoPointTest {
                 new TestCase(new GeoPoint(-8.546770, 37.077698), new GeoPoint(-30.310225, 138.907860), new GeoPoint(-29.1399616045078, 83.22081823946012)),
                 new TestCase(new GeoPoint(0, 45), new GeoPoint(0, 90), new GeoPoint(0, 67.5)),
                 new TestCase(new GeoPoint(90, 0), new GeoPoint(0, 180), new GeoPoint(45, 90)),
-        new TestCase(new GeoPoint(-90, 0), new GeoPoint(0, 180), new GeoPoint(-45, 90))
+                new TestCase(new GeoPoint(-90, 0), new GeoPoint(0, 180), new GeoPoint(-45, 90))
         );
 
         for (TestCase testCase : testCases) {

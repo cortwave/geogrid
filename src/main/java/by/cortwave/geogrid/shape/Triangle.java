@@ -2,24 +2,22 @@ package by.cortwave.geogrid.shape;
 
 import java.util.Arrays;
 import java.util.List;
-import static java.lang.Math.abs;
 
 /**
  * @author Dmitry Pranchuk
  * @since 5/8/17.
  */
 public class Triangle implements Zone {
+    public final GeoPoint a;
+    public final GeoPoint b;
+    public final GeoPoint c;
+    public final String id;
     public Triangle(GeoPoint a, GeoPoint b, GeoPoint c, String id) {
         this.a = a;
         this.b = b;
         this.c = c;
         this.id = id;
     }
-
-    public final GeoPoint a;
-    public final GeoPoint b;
-    public final GeoPoint c;
-    public final String id;
 
     /**
      * Checks if triangle intersects with circle
