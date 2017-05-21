@@ -24,6 +24,15 @@ public class GeoPointTest {
             private GeoPoint pointA;
             private GeoPoint pointB;
             private GeoPoint middlePoint;
+
+            @Override
+            public String toString() {
+                return "TestCase{" +
+                        "pointA=" + pointA +
+                        ", pointB=" + pointB +
+                        ", middlePoint=" + middlePoint +
+                        '}';
+            }
         }
 
         List<TestCase> testCases = Arrays.asList(
@@ -34,14 +43,13 @@ public class GeoPointTest {
                 new TestCase(new GeoPoint(-7.065273, -40.711679), new GeoPoint(-38.726086, -73.231210), new GeoPoint(-23.732961109037166, -54.97116026977392)),
                 new TestCase(new GeoPoint(34.904545, -117.291397), new GeoPoint(48.568881, -65.869824), new GeoPoint(44.678439991822614, -94.5267862057571)),
                 new TestCase(new GeoPoint(-8.546770, 37.077698), new GeoPoint(-30.310225, 138.907860), new GeoPoint(-29.1399616045078, 83.22081823946012)),
-                new TestCase(new GeoPoint(0, 45), new GeoPoint(0, 90), new GeoPoint(0, 67.5)),
-                new TestCase(new GeoPoint(90, 0), new GeoPoint(0, 180), new GeoPoint(45, 90)),
-                new TestCase(new GeoPoint(-90, 0), new GeoPoint(0, 180), new GeoPoint(-45, 90))
+                new TestCase(new GeoPoint(0, 45), new GeoPoint(0, 90), new GeoPoint(0, 67.5))
         );
 
         for (TestCase testCase : testCases) {
             GeoPoint middleGeoPoint = testCase.pointA.getMiddlePointTo(testCase.pointB);
             GeoPoint reversedMiddleGeoPoint = testCase.pointB.getMiddlePointTo(testCase.pointA);
+            System.out.println(testCase);
             TestUtil.assertEquals(testCase.middlePoint, middleGeoPoint);
             TestUtil.assertEquals(testCase.middlePoint, reversedMiddleGeoPoint);
         }
