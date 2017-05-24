@@ -16,16 +16,6 @@ import java.util.Map;
  * @since 5/9/17.
  */
 public class HexGridTest {
-    private class TestCaseId {
-        private TestCaseId(GeoPoint point, String hexId) {
-            this.point = point;
-            this.hexId = hexId;
-        }
-
-        private GeoPoint point;
-        private String hexId;
-    }
-
     @Test
     public void getZoneAt_detalization_4_id() throws Exception {
         List<TestCaseId> cases = Arrays.asList(
@@ -42,7 +32,7 @@ public class HexGridTest {
             Assert.assertEquals(testCase.hexId, grid.getZoneAt(testCase.point).getId());
         }
     }
-    
+
     @Test
     public void getZoneAt_detalization_8_id() throws Exception {
         List<TestCaseId> cases = Arrays.asList(
@@ -74,6 +64,30 @@ public class HexGridTest {
         HexGrid grid = new HexGrid(12);
         for (TestCaseId testCase : cases) {
             Assert.assertEquals(testCase.hexId, grid.getZoneAt(testCase.point).getId());
+        }
+    }
+
+    @Test
+    public void getZoneAt_prefix() {
+        List<GeoPoint> points = Arrays.asList(
+                new GeoPoint(51.631907, 69.882734),
+                new GeoPoint(53.870121, 27.550767),
+                new GeoPoint(39.822484, -89.721609),
+                new GeoPoint(-12.173478, -54.291088),
+                new GeoPoint(-9.780389, 29.084406),
+                new GeoPoint(-24.190612, 144.314865));
+        for (GeoPoint point : points) {
+            for (int detalizationLevel = 2; detalizationLevel < 12; detalizationLevel++) {
+                HexGrid grid = new HexGrid(detalizationLevel);
+                Hex hex = grid.getZoneAt(point);
+                HexGrid gridPrev = new HexGrid(detalizationLevel - 1);
+                Hex hexPrev = gridPrev.getZoneAt(point);
+                List<String> prevTrianglesIds = Arrays.asList(hexPrev.getId().split(":"));
+                List<String> trianglesIds = Arrays.asList(hex.getId().split(":"));
+                for (String triangleId : trianglesIds) {
+                    Assert.assertTrue(prevTrianglesIds.stream().anyMatch(x -> x.equals(triangleId.substring(0, triangleId.length() - 1))));
+                }
+            }
         }
     }
 
@@ -114,5 +128,14 @@ public class HexGridTest {
         });
         Hex hex = hexes.values().iterator().next();
         System.out.println(hex.getPolygon().get(0).getDistanceTo(hex.getPolygon().get(1)));
+    }
+
+    private class TestCaseId {
+        private GeoPoint point;
+        private String hexId;
+        private TestCaseId(GeoPoint point, String hexId) {
+            this.point = point;
+            this.hexId = hexId;
+        }
     }
 }
