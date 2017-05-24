@@ -32,19 +32,6 @@ public class Triangle implements Zone {
     }
 
     /**
-     * Checks if point inside triangle
-     *
-     * @param geoPoint point
-     * @return is point inside triangle
-     */
-    public boolean isPointInside(GeoPoint geoPoint) {
-        boolean orientationA = geoPoint.getCrossTrackDistance(a, b) > 0;
-        boolean orientationB = geoPoint.getCrossTrackDistance(b, c) > 0;
-        boolean orientationC = geoPoint.getCrossTrackDistance(c, a) > 0;
-        return (orientationA == orientationB) && (orientationB == orientationC);
-    }
-
-    /**
      * Returns center of triangle
      * Works good only for small triangles where we can ignore spherical distortion
      *
@@ -87,7 +74,13 @@ public class Triangle implements Zone {
         return point.getDistanceTo(getCenter()) < 1.5 * ac;
     }
 
-    public double getDistanceToClosestVerticle(GeoPoint point) {
+    /**
+     * Calculates distance in metres from point to closest triangle vertex
+     *
+     * @param point point to calculate distance from
+     * @return distance to closest vertex
+     */
+    public double getDistanceToClosestVertex(GeoPoint point) {
         return Math.min(a.getDistanceTo(point), Math.min(b.getDistanceTo(point), c.getDistanceTo(point)));
     }
 

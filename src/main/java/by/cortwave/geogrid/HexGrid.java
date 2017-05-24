@@ -43,7 +43,7 @@ public class HexGrid implements Grid<Hex> {
             currentDetalization += 1;
         }
         List<Triangle> hexTriangles = sortedTriangles
-                .sorted(Comparator.comparingDouble(t -> t.getDistanceToClosestVerticle(point)))
+                .sorted(Comparator.comparingDouble(t -> t.getDistanceToClosestVertex(point)))
                 .limit(6)
                 .collect(Collectors.toList());
         return new Hex(hexTriangles);

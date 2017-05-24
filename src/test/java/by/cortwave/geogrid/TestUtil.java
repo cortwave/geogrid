@@ -2,6 +2,7 @@ package by.cortwave.geogrid;
 
 import by.cortwave.geogrid.shape.GeoPoint;
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Dmitry Pranchuk

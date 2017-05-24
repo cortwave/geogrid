@@ -44,40 +44,6 @@ public class TriangleTest {
     }
 
     @Test
-    public void isPointInsideTest() {
-        class TestCase {
-            private TestCase(Triangle triangle, GeoPoint point, boolean result) {
-                this.triangle = triangle;
-                this.point = point;
-                this.result = result;
-            }
-
-            private Triangle triangle;
-            private GeoPoint point;
-            private boolean result;
-        }
-
-        List<TestCase> testCases = Arrays.asList(
-                new TestCase(new Triangle(new GeoPoint(65.261136, 18.908054), new GeoPoint(38.511113, -3.238962), new GeoPoint(39.080154, 43.732182), "1"),
-                        new GeoPoint(48.855187, 17.326124),
-                        true),
-                new TestCase(new Triangle(new GeoPoint(65.261136, 18.908054), new GeoPoint(38.511113, -3.238962), new GeoPoint(39.080154, 43.732182), "1"),
-                        new GeoPoint(59.095086, 80.968374),
-                        false),
-                new TestCase(new Triangle(new GeoPoint(65.261136, 18.908054), new GeoPoint(38.511113, -3.238962), new GeoPoint(39.080154, 43.732182), "1"),
-                        new GeoPoint(16.332001, 12.520270),
-                        false),
-                new TestCase(new Triangle(new GeoPoint(65.261136, 18.908054), new GeoPoint(38.511113, -3.238962), new GeoPoint(39.080154, 43.732182), "1"),
-                        new GeoPoint(49.060369, -25.624261),
-                        false)
-        );
-
-        for (TestCase testCase : testCases) {
-            Assert.assertEquals(testCase.result, testCase.triangle.isPointInside(testCase.point));
-        }
-    }
-
-    @Test
     public void getCenterTest() {
         class TestCase {
             private TestCase(Triangle triangle, GeoPoint center) {
