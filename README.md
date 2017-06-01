@@ -4,7 +4,7 @@
 
 Library for creating hex grid on sphere
 
-### quick start
+## Quick start
 
 ```java
 int detalizationLevel = 12;
