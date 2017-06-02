@@ -4,6 +4,18 @@
 
 Library for creating hex grid on sphere
 
+## Setup
+
+### Gradle (Jitpack dependency)
+```gradle
+repositories {
+    ...
+    maven { url "https://jitpack.io" }
+}
+
+compile 'com.github.cortwave:geogrid:0.1.0'
+```
+
 ## Quick start
 
 ```java
