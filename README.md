@@ -24,7 +24,7 @@ Grid<Hex> grid = new HexGrid(detalizationLevel);
 double latitude = -35.44;
 double longitude = 22.34;
 GeoPoint point = new GeoPoint(latitude, longitude);
-Hex hex = gride.getZoneAt(point);
+Hex hex = grid.getZoneAt(point);
 List<GeoPoint> polygon = hex.getPolygon();
 String zoneId = hex.getId();
 ```
