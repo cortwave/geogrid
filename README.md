@@ -28,3 +28,9 @@ Hex hex = grid.getZoneAt(point);
 List<GeoPoint> polygon = hex.getPolygon();
 String zoneId = hex.getId();
 ```
+
+## Examples of work
+
+#### Detalization level 5 grid
+
+![detalization level 5](examples/map5.png)
