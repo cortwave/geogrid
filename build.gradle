@@ -2,6 +2,7 @@ group 'by.cortwave'
 version '0.1.0'
 
 apply plugin: 'java'
+apply plugin: 'maven'
 
 sourceCompatibility = 1.8
 
@@ -11,4 +12,37 @@ repositories {
 
 dependencies {
     testCompile "junit:junit:4.12"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/java'
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            licenses {
+                license {
+                    name 'BSD 3-Clause License'
+                    url 'https://opensource.org/licenses/BSD-3-Clause'
+                    distribution 'repo'
+                }
+            }
+        }
+    }
 }
