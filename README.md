@@ -39,3 +39,7 @@ String zoneId = hex.getId();
 
 ![detalization level 16](examples/map16.png)
 
+#### Detalization level 7 (Australia)
+
+![detalization level 17](examples/map7.png)
+
