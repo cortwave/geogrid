@@ -34,3 +34,8 @@ String zoneId = hex.getId();
 #### Detalization level 5 grid
 
 ![detalization level 5](examples/map5.png)
+
+#### Detalization level 16 grid (Manhattan)
+
+![detalization level 16](examples/map16.png)
+
