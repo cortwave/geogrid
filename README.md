@@ -29,7 +29,7 @@ List<GeoPoint> polygon = hex.getPolygon();
 String zoneId = hex.getId();
 ```
 
-## Hex side and square
+## Hex side and area
 
 #### Hex side
 ![hex side](examples/hex_side.png)
@@ -37,10 +37,10 @@ String zoneId = hex.getId();
 where b - hex side, d - detalization level, C - Earth meridional circumference (40 007.86 km) 
 
 
-#### Hex square
+#### Hex area
 ![hex square](examples/hex_square.png)
 
-where Sb - hex square, d - detalization level, Se - Earth square (510072000 km^2) 
+where Sb - hex area, d - detalization level, Se - Earth surface area (510072000 km^2) 
 
 
 ## Examples of work
